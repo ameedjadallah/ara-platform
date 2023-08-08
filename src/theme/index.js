@@ -11,6 +11,7 @@ export function createTheme() {
   const typography = createTypography();
 
   return createMuiTheme({
+    direction: 'rtl',
     breakpoints: {
       values: {
         xs: 0,

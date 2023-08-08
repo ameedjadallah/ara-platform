@@ -27,9 +27,9 @@ export const neutral = {
 export const indigo = withAlphas({
   lightest: '#F5F7FF',
   light: '#EBEEFE',
-  main: '#6366F1',
-  dark: '#4338CA',
-  darkest: '#312E81',
+  main: '#417DAB',
+  dark: '#3C739D',
+  darkest: '#346184',
   contrastText: '#FFFFFF'
 });
 
