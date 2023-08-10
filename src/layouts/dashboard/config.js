@@ -28,6 +28,15 @@ export const items = [
     )
   },
   {
+    title: 'الإقتراحات/الشكاوي',
+    path: '/notes',
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    )
+  },
+  {
     title: 'البلديات',
     path: '/companies',
     icon: (
