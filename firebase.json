@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "araplus",
     "source": ".",
     "ignore": [
       "firebase.json",
