@@ -56,26 +56,20 @@ export const CustomersTable = (props) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Name
+                  الإسم
                 </TableCell>
                 <TableCell>
-                  Email
+                  رقم الهوية
                 </TableCell>
                 <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Signed Up
+                  رقم الهاتف
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((customer) => {
                 const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+                // const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
 
                 return (
                   <TableRow
@@ -101,25 +95,19 @@ export const CustomersTable = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Avatar src={customer.avatar}>
+                        {/* <Avatar src={customer.avatar}>
                           {getInitials(customer.name)}
-                        </Avatar>
+                        </Avatar> */}
                         <Typography variant="subtitle2">
-                          {customer.name}
+                          {customer.Name}
                         </Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      {customer.email}
+                      {customer.ID}
                     </TableCell>
                     <TableCell>
-                      {customer.address.city}, {customer.address.state}, {customer.address.country}
-                    </TableCell>
-                    <TableCell>
-                      {customer.phone}
-                    </TableCell>
-                    <TableCell>
-                      {createdAt}
+                      {customer.Phone}
                     </TableCell>
                   </TableRow>
                 );
