@@ -31,7 +31,7 @@ const Fonts = () => (
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap"
     />
   </>
 );
