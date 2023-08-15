@@ -24,18 +24,21 @@ const Page = () => {
   const auth = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: "demo@devias.io",
-      password: "Password123!",
+      email: "",
+      password: "",
       submit: null,
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Must be a valid email").max(255).required("Email is required"),
-      password: Yup.string().max(255).required("Password is required"),
+      email: Yup.string().max(255).required("أدخل البريد الإلكتروني"),
+      password: Yup.string().max(255).required("أدخل كلمة المرور"),
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signIn(values.email, values.password);
-        router.push("/");
+        let authData = await auth.signIn(values.email, values.password);
+        console.log(authData);
+        if(authData?.name) {
+          router.push("/");
+        }
       } catch (err) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
@@ -47,7 +50,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Login | Devias Kit</title>
+        <title>تسجيل دخول | ARA</title>
       </Head>
       <Box
         sx={{
@@ -76,12 +79,16 @@ const Page = () => {
                   error={!!(formik.touched.email && formik.errors.email)}
                   fullWidth
                   helperText={formik.touched.email && formik.errors.email}
-                  label="البريد الإلكتروني"
+                  label="البريد الإلكتروني / اسم المستخدم"
                   name="email"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   type="email"
                   value={formik.values.email}
+                  inputProps={{
+                    autoComplete: "off",
+                  
+                  }}
                 />
                 <TextField
                   error={!!(formik.touched.password && formik.errors.password)}
@@ -93,6 +100,12 @@ const Page = () => {
                   onChange={formik.handleChange}
                   type="password"
                   value={formik.values.password}
+                  inputProps={{
+                    autoComplete: "password",
+                    form: {
+                      autoComplete: "off",
+                    },
+                  }}
                 />
               </Stack>
               {formik.errors.submit && (

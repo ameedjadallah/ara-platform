@@ -8,7 +8,7 @@ import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import { SvgIcon } from '@mui/material';
 
-export const items = [
+export const items2 = [
   {
     title: 'الرئيسية',
     path: '/',
@@ -30,7 +30,7 @@ export const items = [
     show: true
   },
   {
-    title: 'الإقتراحات والشكاوي'    ,
+    title:'الإقتراحات والشكاوي'    ,
     path: '/notes',
     icon: (
       <SvgIcon fontSize="small">
@@ -38,27 +38,6 @@ export const items = [
       </SvgIcon>
     ),
     show: true
-  },
-  {
-    title: 'البلديات',
-    path: '/companies',
-    icon: (
-      <SvgIcon fontSize="small">
-        <ShoppingBagIcon />
-      </SvgIcon>
-    ),
-    show : true
-  },
-  {
-    title: 'إضافة بلدية',
-    path: '/account',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    ),
-    show : true
-
   },
   {
     title: 'الإعدادات',

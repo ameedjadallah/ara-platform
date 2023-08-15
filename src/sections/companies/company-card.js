@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
-import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
-import ClockIcon from '@heroicons/react/24/solid/ClockIcon';
-import { Avatar, Box, Card, CardContent, Divider, Stack, SvgIcon, Typography } from '@mui/material';
+import PropTypes from "prop-types";
+import Phone from "@heroicons/react/24/solid/PhoneIcon";
+import ClockIcon from "@heroicons/react/24/solid/EnvelopeIcon";
+import { Avatar, Box, Card, CardContent, Divider, Stack, SvgIcon, Typography } from "@mui/material";
+import BuildingLibraryIcon from "@heroicons/react/24/solid/BuildingLibraryIcon";
 
 export const CompanyCard = (props) => {
   const { company } = props;
@@ -9,37 +10,30 @@ export const CompanyCard = (props) => {
   return (
     <Card
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%'
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
       }}
     >
       <CardContent>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pb: 3
+            display: "flex",
+            justifyContent: "center",
+            pb: 3,
           }}
         >
-          <Avatar
-            src={company.logo}
-            variant="square"
-          />
+          <SvgIcon color="primary" fontSize="large">
+            <BuildingLibraryIcon />
+          </SvgIcon>
         </Box>
-        <Typography
-          align="center"
-          gutterBottom
-          variant="h5"
-        >
-          {company.title}
+        <Typography align="center" gutterBottom variant="h5">
+          {company.name}
         </Typography>
-        <Typography
-          align="center"
-          variant="body1"
-        >
-          {company.description}
+        <Typography align="center" variant="body1">
+          مدينة {company.city}
         </Typography>
+        
       </CardContent>
       <Box sx={{ flexGrow: 1 }} />
       <Divider />
@@ -50,42 +44,20 @@ export const CompanyCard = (props) => {
         spacing={2}
         sx={{ p: 2 }}
       >
-        <Stack
-          alignItems="center"
-          direction="row"
-          spacing={1}
-        >
-          <SvgIcon
-            color="action"
-            fontSize="small"
-          >
+        <Stack alignItems="center" direction="row" spacing={1}>
+          <SvgIcon color="action" fontSize="small">
             <ClockIcon />
           </SvgIcon>
-          <Typography
-            color="text.secondary"
-            display="inline"
-            variant="body2"
-          >
-            Updated 2hr ago
+          <Typography color="text.secondary" display="inline" variant="body2">
+            {company.email}
           </Typography>
         </Stack>
-        <Stack
-          alignItems="center"
-          direction="row"
-          spacing={1}
-        >
-          <SvgIcon
-            color="action"
-            fontSize="small"
-          >
-            <ArrowDownOnSquareIcon />
+        <Stack alignItems="center" direction="row" spacing={1}>
+          <SvgIcon color="action" fontSize="small">
+            <Phone />
           </SvgIcon>
-          <Typography
-            color="text.secondary"
-            display="inline"
-            variant="body2"
-          >
-            {company.downloads} Downloads
+          <Typography color="text.secondary" display="inline" variant="body2">
+            {company.phone}
           </Typography>
         </Stack>
       </Stack>
@@ -94,5 +66,5 @@ export const CompanyCard = (props) => {
 };
 
 CompanyCard.propTypes = {
-  company: PropTypes.object.isRequired
+  company: PropTypes.object.isRequired,
 };

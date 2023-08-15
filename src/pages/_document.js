@@ -6,8 +6,6 @@ import createCache from "@emotion/cache";
 import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 
-
-
 const Favicon = () => (
   <>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -31,7 +29,11 @@ const Fonts = () => (
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto Kufi Arabic:wght@600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
     />
   </>
 );
@@ -60,7 +62,7 @@ CustomDocument.getInitialProps = async (ctx) => {
     // prefixer is the only stylis plugin by default, so when
     // overriding the plugins you need to include it explicitly
     // if you want to retain the auto-prefixing behavior.
-    stylisPlugins: [prefixer, rtlPlugin]
+    stylisPlugins: [prefixer, rtlPlugin],
   });
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
@@ -69,7 +71,7 @@ CustomDocument.getInitialProps = async (ctx) => {
       enhanceApp: (App) => (props) => <App emotionCache={cache} {...props} />,
     });
 
-  const initialProps = await Document.getInitialProps(ctx);
+  const initialProps = await Document?.getInitialProps(ctx);
   const emotionStyles = extractCriticalToChunks(initialProps.html);
   const emotionStyleTags = emotionStyles.styles.map((style) => (
     <style

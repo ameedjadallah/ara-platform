@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, getMetadata } from "firebase/storage"; // Import functions from storage module
 
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,4 +22,28 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+
 export const database = getFirestore(app);
+
+export const getFileDownloadURL = async (filePath) => {
+  const fileRef = ref(storage, filePath);
+  try {
+    const downloadURL = await getDownloadURL(fileRef);
+    return downloadURL;
+  } catch (error) {
+    console.error("Error getting file download URL:", error);
+    return null;
+  }
+};
+
+export const getFileMetadata = async (filePath) => {
+  const fileRef = ref(storage, filePath);
+  try {
+    const metadata = await getMetadata(fileRef);
+    return metadata;
+  } catch (error) {
+    console.error("Error getting file metadata:", error);
+    return null;
+  }
+};

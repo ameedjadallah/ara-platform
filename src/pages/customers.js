@@ -1,120 +1,100 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import Head from 'next/head';
-import { subDays, subHours } from 'date-fns';
-import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
-import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
-import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
-import { useSelection } from 'src/hooks/use-selection';
-import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { CustomersTable } from 'src/sections/customer/customers-table';
-import { CustomersSearch } from 'src/sections/customer/customers-search';
-import { applyPagination } from 'src/utils/apply-pagination';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Head from "next/head";
+import { subDays, subHours } from "date-fns";
+import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
+import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
+import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
+import { Box, Button, Container, Stack, SvgIcon, Typography } from "@mui/material";
+import { useSelection } from "src/hooks/use-selection";
+import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
+import { CustomersTable } from "src/sections/customer/customers-table";
+import { CustomersSearch } from "src/sections/customer/customers-search";
+import { applyPagination } from "src/utils/apply-pagination";
 
-import { app, database } from '../../firebase';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { app, database } from "../../firebase";
+import { collection, getDocs, where, query } from "firebase/firestore";
+import { useAuth } from "@/hooks/use-auth";
 
 const now = new Date();
 
-
-const useCustomers = (data,page, rowsPerPage) => {
-  return useMemo(
-    () => {
-      return applyPagination(data, page, rowsPerPage);
-    },
-    [data,page, rowsPerPage]
-  );
+const useCustomers = (data, page, rowsPerPage) => {
+  return useMemo(() => {
+    return applyPagination(data, page, rowsPerPage);
+  }, [data, page, rowsPerPage]);
 };
 
 const useCustomerIds = (customers) => {
-  return useMemo(
-    () => {
-      return customers.map((customer) => customer.id);
-    },
-    [customers]
-  );
+  return useMemo(() => {
+    return customers.map((customer) => customer.id);
+  }, [customers]);
 };
 
 const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [data, setData] = useState([])
-  const customers = useCustomers(data,page, rowsPerPage);
+  const [data, setData] = useState([]);
+  const customers = useCustomers(data, page, rowsPerPage);
   const customersIds = useCustomerIds(customers);
   const customersSelection = useSelection(customersIds);
 
-
-  const handlePageChange = useCallback(
-    (event, value) => {
-      setPage(value);
-    },
-    []
-  );
+  const handlePageChange = useCallback((event, value) => {
+    setPage(value);
+  }, []);
 
   const getAllUsers = () => {
-    const dbInstance = collection(database, 'Users');
-    getDocs(dbInstance)
-    .then((data) => {
-      let x = data.docs.map((item) => {
-        return { ...item.data(), id: item.id }
+    const dbInstance = collection(database, "Users");
+
+    if (window?.sessionStorage.getItem("ara_superuser") === "true") {
+      getDocs(dbInstance).then((data) => {
+        let x = data.docs.map((item) => {
+          return { ...item.data(), id: item.id };
+        });
+
+        setData(x);
       });
+    } else {
+      getDocs(
+        query(
+          dbInstance,
+          where("municipalities", "==", window?.sessionStorage.getItem("ara_userId"))
+        )
+      ).then((data) => {
+        let x = data.docs.map((item) => {
+          return { ...item.data(), id: item.id };
+        });
 
-      setData(x);
-     
-    })
-  }
+        setData(x);
+      });
+    }
+  };
 
-  const handleRowsPerPageChange = useCallback(
-    (event) => {
-      setRowsPerPage(event.target.value);
-    },
-    []
-  );
+  const handleRowsPerPageChange = useCallback((event) => {
+    setRowsPerPage(event.target.value);
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllUsers();
-  })
+  }, []);
 
   return (
     <>
       <Head>
-        <title>
-          المستخدمون | ARA
-        </title>
+        <title>المستخدمون | ARA</title>
       </Head>
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          py: 4
+          py: 4,
         }}
       >
         <Container maxWidth="xl">
           <Stack spacing={3}>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              spacing={4}
-            >
-              <Stack spacing={1}>
-                <Typography variant="h4">
-                المستخدمون
-                </Typography>
+            <Stack direction="row" justifyContent="space-between" spacing={4}>
+              <Stack spacing={1} sx={{ mb: 2 }}>
+                <Typography variant="h5">المستخدمون</Typography>
               </Stack>
-              <div>
-                <Button
-                  startIcon={(
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  )}
-                  variant="contained"
-                >
-                  Add
-                </Button>
-              </div>
             </Stack>
-            <CustomersSearch />
             <CustomersTable
               count={data.length}
               items={customers}
@@ -135,10 +115,6 @@ const Page = () => {
   );
 };
 
-Page.getLayout = (page) => (
-  <DashboardLayout>
-    {page}
-  </DashboardLayout>
-);
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
