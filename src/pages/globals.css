@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "OpenSans Bold";
+  src: url("/assets/fonts/OPENSANSHEBREW-BOLD.TTF");
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "OpenSans Regular";
+  src: url("/assets/fonts/OPENSANSHEBREW-REGULAR.TTF");
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "DIN Regular";
+  src: url("/assets/fonts/DINNextLTArabic-Regular.ttf");
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "DIN Bold";
+  src: url("/assets/fonts/DINNextLTArabic-Bold.ttf");
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Regular";
+  src: url("/assets/fonts/HelveticaNeueLTArabic-Regular.ttf");
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Bold";
+  src: url("/assets/fonts/HelveticaNeueLTArabic-Bold.ttf");
+  font-style: normal;
+  font-stretch: normal;
+}
+
+table th {
+  font-size: 16px !important;
+}
+table td h6,
+table td span {
+  font-size: 14px !important;
+}
+
+.simplebar-content-wrapper li a {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.simplebar-content-wrapper li a span {
+  font-size: 16px !important;
+}
+
+body {
+  font-size: 15px;
+}

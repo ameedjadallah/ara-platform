@@ -36,13 +36,13 @@ export const AccountPopover = (props) => {
         }}
       >
         <Typography variant="overline">
-          Account
+          الحساب
         </Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          Anika Visser
+          {window.sessionStorage.getItem('ara_username')}
         </Typography>
       </Box>
       <Divider />
@@ -57,7 +57,7 @@ export const AccountPopover = (props) => {
         }}
       >
         <MenuItem onClick={handleSignOut}>
-          Sign out
+          تسجيل خروج
         </MenuItem>
       </MenuList>
     </Popover>

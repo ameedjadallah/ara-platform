@@ -16,7 +16,8 @@ export const items = [
       <SvgIcon fontSize="small">
         <ChartBarIcon />
       </SvgIcon>
-    )
+    ),
+    show: true
   },
   {
     title: 'المستخدمون',
@@ -25,7 +26,18 @@ export const items = [
       <SvgIcon fontSize="small">
         <UsersIcon />
       </SvgIcon>
-    )
+    ),
+    show: true
+  },
+  {
+    title: 'الإقتراحات والشكاوي'    ,
+    path: '/notes',
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+    show: true
   },
   {
     title: 'البلديات',
@@ -34,7 +46,8 @@ export const items = [
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />
       </SvgIcon>
-    )
+    ),
+    show : true
   },
   {
     title: 'إضافة بلدية',
@@ -43,7 +56,9 @@ export const items = [
       <SvgIcon fontSize="small">
         <UserIcon />
       </SvgIcon>
-    )
+    ),
+    show : true
+
   },
   {
     title: 'الإعدادات',
@@ -52,7 +67,8 @@ export const items = [
       <SvgIcon fontSize="small">
         <CogIcon />
       </SvgIcon>
-    )
+    ),
+    show: true
   },
   // {
   //   title: 'Login',

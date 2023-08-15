@@ -8,21 +8,21 @@ const Page = () => (
   <>
     <Head>
       <title>
-        Account | Devias Kit
+        إضافة بلدية | ARA
       </title>
     </Head>
     <Box
       component="main"
       sx={{
         flexGrow: 1,
-        py: 8
+        py: 4
       }}
     >
       <Container maxWidth="lg">
         <Stack spacing={3}>
           <div>
-            <Typography variant="h4">
-              Account
+            <Typography variant="h3">
+              إضافة بلدية
             </Typography>
           </div>
           <div>
@@ -30,13 +30,13 @@ const Page = () => (
               container
               spacing={3}
             >
-              <Grid
+              {/* <Grid
                 xs={12}
                 md={6}
                 lg={4}
               >
                 <AccountProfile />
-              </Grid>
+              </Grid> */}
               <Grid
                 xs={12}
                 md={6}
